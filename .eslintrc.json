@@ -1,0 +1,7 @@
+{
+    "indent": [
+        "error",
+        2
+    ],
+    "no-multiple-empty-line": true
+}
