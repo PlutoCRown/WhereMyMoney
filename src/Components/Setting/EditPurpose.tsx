@@ -2,18 +2,14 @@ import { Chip, Stack } from "@mui/material";
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { usePurpose } from "@/hooks/usePurpose";
+import Chips from "./Chips";
 
 const EditPurpose = () => {
-  const { data: Purposes } = usePurpose();
+  const { data: Purposes, Add, rename } = usePurpose();
   return (
     <div>
-      <h2>编辑账单目的</h2>
-      <Stack direction="row" spacing={1}>
-        {Purposes.map((i) => (
-          <Chip label={i.name} color="success" key={i.id} />
-        ))}
-        <Chip label="添加" color="success" icon={<AddIcon />} />
-      </Stack>
+      <h2>编辑支出原因</h2>
+      <Chips List={Purposes} Add={Add} rename={rename} color="success" />
     </div>
   );
 };

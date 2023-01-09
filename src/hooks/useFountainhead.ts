@@ -16,14 +16,17 @@ export const useFountainhead = () => {
   const [Fountainhead, setFountainhead] = useState(config);
   return {
     data: Fountainhead,
-    Add: (name: string) => {
-      Fountainhead.push({
+    Add: (callback: any) => {
+      const n = {
         id: RandomId(),
-        name: name,
-      });
+        name: "",
+      };
+      Fountainhead.push(n);
       setFountainhead([...Fountainhead]);
+      callback(n);
     },
     rename: (id: string, name: string) => {
+      if (name == "") return;
       Fountainhead.filter((i) => i.id == id)[0].name = name;
       setFountainhead([...Fountainhead]);
     },

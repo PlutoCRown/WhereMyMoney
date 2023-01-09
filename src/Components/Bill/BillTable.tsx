@@ -40,10 +40,10 @@ const BillTable: React.FC<{
                 <StyledTableCell component="th" scope="row">
                   {row.date.toDateString()}
                 </StyledTableCell>
-                <StyledTableCell>{row.From}</StyledTableCell>
-                <StyledTableCell>{row.By}</StyledTableCell>
-                <StyledTableCell>{row.amount}</StyledTableCell>
-                <StyledTableCell align="right">{row.remarks}</StyledTableCell>
+                <StyledTableCell>{row.Taker}</StyledTableCell>
+                <StyledTableCell>{row.Reason}</StyledTableCell>
+                <StyledTableCell>{row.Amount}</StyledTableCell>
+                <StyledTableCell align="right">{row.Remark}</StyledTableCell>
                 <StyledTableCell align="right">
                   <HoverDisplay>
                     <BorderColorIcon />

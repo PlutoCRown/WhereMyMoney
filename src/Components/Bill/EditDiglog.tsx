@@ -16,7 +16,7 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import SelectInput from "./SelectInput";
 import { HeaderWapper } from "./style";
 import { RandomId } from "@/util/RandomId";
-import { useTaker, usePurpose, useFountainhead } from "@/hooks";
+import { useTaker, usePurpose, useFountainhead, useBills } from "@/hooks";
 
 const EditDiglog: React.FC<{
   handleClose: () => any;
@@ -26,27 +26,26 @@ const EditDiglog: React.FC<{
   const { data: Takers } = useTaker();
   const { data: Purposes } = usePurpose();
   const { data: Fountainhead } = useFountainhead();
-  // TODO: 这里想用useRef来获取表单内容但是获取不到
   const TakeRef = useRef(null);
   const PurposeRef = useRef(null);
   const AmountRef = useRef(null);
   const RemarkRef = useRef(null);
   const DateRef = useRef(null);
-  const [value, setValue] = React.useState<{ name: string; id: string } | null>(
-    null
-  );
+  const { Add } = useBills();
+  // const [value, setValue] = React.useState<{ name: string; id: string } | null>(
+  //   null
+  // );
   const submit = () => {
     const data = {
-      id: RandomId(),
+      id: crypto.randomUUID(),
       date: (DateRef.current! as any).value,
       Taker: (TakeRef.current! as any).value,
-      Purpose: (PurposeRef.current! as any).value,
-      Amount: (AmountRef.current! as any).value,
+      Reason: (PurposeRef.current! as any).value,
+      Amount: (AmountRef.current! as any).value * (isIncome ? 1 : -1),
       Remark: (RemarkRef.current! as any).value,
     };
-    console.log(data);
-    // Add();
-    // handleClose();
+    Add(data);
+    handleClose();
   };
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -58,7 +57,7 @@ const EditDiglog: React.FC<{
             ) : (
               <AddReactionIcon className="icon" />
             )}{" "}
-            {isIncome ? "花了一笔" : "获得收入"}{" "}
+            {isIncome ? "获得收入" : "花了一笔"}{" "}
             <CompareArrowsIcon
               onClick={() => setIsIncome((pre) => !pre)}
               className="icon switch"
@@ -85,7 +84,7 @@ const EditDiglog: React.FC<{
           <Grid xs={6} item>
             <SelectInput
               label={`${isIncome ? "收入来源" : "支出原因"}`}
-              SelectList={isIncome ? Purposes : Purposes}
+              SelectList={isIncome ? Fountainhead : Purposes}
               icon={<CurrencyExchangeIcon />}
               Iref={PurposeRef}
             />

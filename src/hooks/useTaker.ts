@@ -16,14 +16,17 @@ export const useTaker = () => {
   const [Taker, setTaker] = useState(config);
   return {
     data: Taker,
-    Add: (name: string) => {
-      Taker.push({
+    Add: (callback: any) => {
+      const n = {
         id: RandomId(),
-        name: name,
-      });
+        name: "",
+      };
+      Taker.push(n);
       setTaker([...Taker]);
+      callback(n);
     },
     rename: (id: string, name: string) => {
+      if (name == "") return;
       Taker.filter((i) => i.id == id)[0].name = name;
       setTaker([...Taker]);
     },

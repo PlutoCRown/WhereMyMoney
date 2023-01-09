@@ -3,6 +3,9 @@ import { Box } from "@mui/material";
 
 export const HomePageWapper = styled(Box)`
   display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
   background-image: linear-gradient(
     78.88deg,
     #ced4e6 9.16%,
@@ -12,6 +15,7 @@ export const HomePageWapper = styled(Box)`
 `;
 
 export const HomeNavWapper = styled(Box)`
+  height: 100%;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -39,6 +43,7 @@ export const HomeNavWapper = styled(Box)`
 
 export const HomeContentWapper = styled(Box)`
   width: 98%;
+  height: 90vh;
   max-height: 97vh;
   overflow: hidden;
   padding: 20px;

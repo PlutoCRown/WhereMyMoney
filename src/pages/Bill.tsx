@@ -1,6 +1,7 @@
 import BillTable from "@/Components/Bill/BillTable";
 import EditDiglog from "@/Components/Bill/EditDiglog";
 import { useBills } from "@/hooks/useBills";
+import { Button } from "@mui/material";
 import React, { useState } from "react";
 
 function createData(
@@ -16,20 +17,15 @@ function createData(
 
 export default () => {
   const [open, setOpen] = useState(false);
-  // const rows = [
-  //   createData("1", new Date(), "159", "6", 24, "4"),
-  //   createData("2", new Date(), "237", "9", 37, "4"),
-  //   createData("3", new Date(), "262", "2", 24, "ssdas"),
-  //   createData("4", new Date(), "305", "3", 67, "4"),
-  //   createData("5", new Date(), "356", "1", 49, "dsasd"),
-  // ];
-  const { data: rows } = useBills();
+  const { data: rows, del } = useBills();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
+      <Button onClick={del}>inter LOG</Button>
+      <Button onClick={() => console.log(rows)}>outer LOG</Button>
       <BillTable data={rows} Add={handleOpen} />
       <EditDiglog open={open} handleClose={handleClose}></EditDiglog>
     </div>

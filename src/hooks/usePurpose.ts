@@ -16,14 +16,17 @@ export const usePurpose = () => {
   const [Purpose, setPurpose] = useState(config);
   return {
     data: Purpose,
-    Add: (name: string) => {
-      Purpose.push({
+    Add: (callback: any) => {
+      const n = {
         id: RandomId(),
-        name: name,
-      });
+        name: "",
+      };
+      Purpose.push(n);
       setPurpose([...Purpose]);
+      callback(n);
     },
     rename: (id: string, name: string) => {
+      if (name == "") return;
       Purpose.filter((i) => i.id == id)[0].name = name;
       setPurpose([...Purpose]);
     },

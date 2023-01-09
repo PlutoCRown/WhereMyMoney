@@ -14,7 +14,8 @@ const Plugin = () => {
 
   return (
     <div>
-      <Box sx={{ height: "90vh", transform: "translateZ(0px)", flexGrow: 1 }}>
+      {/* 使用transform使 stackContext落到此层 */}
+      <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
         <PluginList />
         <SpeedDial
           ariaLabel="SpeedDial"
