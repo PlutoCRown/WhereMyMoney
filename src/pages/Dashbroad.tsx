@@ -7,10 +7,10 @@ import {
   Tips,
   TODO,
 } from "@/Components/Dashbroad/style";
+import Tip from "@/Components/Dashbroad/Tip";
 import TodoList from "@/Components/Dashbroad/TodoList";
 import { Box } from "@mui/material";
 import React from "react";
-
 export default () => {
   return (
     <GridContainer>
@@ -24,17 +24,15 @@ export default () => {
       </TODO>
       <Income>
         <b className="title">今日收入</b>
-        <div className="num">666.2222</div>
+        <div className="num green">￥666.22</div>
       </Income>
       <Expenditure>
         <b className="title">今日支出</b>
-        <div className="num">888.5234</div>
+        <div className="num red">￥888.52</div>
       </Expenditure>
       <Tips>
         <b className="title">Tips</b>
-        <div style={{ maxWidth: "250px" }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </div>
+        <Tip></Tip>
       </Tips>
     </GridContainer>
   );

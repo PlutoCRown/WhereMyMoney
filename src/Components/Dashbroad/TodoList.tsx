@@ -1,6 +1,7 @@
 import Checkbox from "@mui/material/Checkbox";
 import { Button, FormControlLabel, Stack } from "@mui/material";
 import React, { useState } from "react";
+import { TodoListWapper } from "./style";
 
 const TodoList = () => {
   const useGen = (title: string) => {
@@ -16,16 +17,16 @@ const TodoList = () => {
     );
   };
   return (
-    <div style={{ maxWidth: "300px" }}>
+    <TodoListWapper>
       <Stack direction="column">
-        {useGen("sadd1adsdsasada")}
+        {useGen("sadd1adsdsadsasdsadsdsadsd")}
         {useGen("sadd1sada")}
         {useGen("sadd1dassasasada")}
       </Stack>
-      <Button variant="contained" fullWidth>
+      <Button variant="contained" fullWidth className="addbtn">
         ADD
       </Button>
-    </div>
+    </TodoListWapper>
   );
 };
 

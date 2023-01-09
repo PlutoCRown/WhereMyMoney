@@ -19,6 +19,7 @@ import { AccountCircle } from "@mui/icons-material";
 import FaceIcon from "@mui/icons-material/Face";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import SelectInput from "../Bill/SelectInput";
+import { BillWapper } from "./style";
 
 const NewBill = () => {
   const { data: Takers } = useTaker();
@@ -26,15 +27,9 @@ const NewBill = () => {
   const { Add } = useBills();
 
   return (
-    <div>
+    <BillWapper>
       <FormControl>
-        <Grid
-          container
-          rowGap={2}
-          columnGap={1}
-          width={250}
-          justifyContent="center"
-        >
+        <Grid container rowGap={2} columnGap={1} justifyContent="center">
           <Grid xs={5} item>
             <SelectInput label={`支出所属`} SelectList={Takers} />
           </Grid>
@@ -55,7 +50,7 @@ const NewBill = () => {
               id="date"
               label="日期"
               type="date"
-              style={{ width: 230 }}
+              style={{ width: "100%" }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -79,7 +74,7 @@ const NewBill = () => {
           </Grid>
         </Grid>
       </FormControl>
-    </div>
+    </BillWapper>
   );
 };
 

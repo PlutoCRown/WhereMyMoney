@@ -35,3 +35,13 @@ export const HoverDisplay = styled(Box)`
     opacity: 1;
   }
 `;
+
+export const HeaderWapper = styled(Box)`
+  font-size: 28px;
+  .icon {
+    vertical-align: middle;
+  }
+  .switch {
+    cursor: pointer;
+  }
+`;

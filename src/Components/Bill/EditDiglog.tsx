@@ -1,5 +1,3 @@
-import { usePurpose } from "@/hooks/usePurpose";
-import { useTaker } from "@/hooks/useTaker";
 import {
   Dialog,
   DialogTitle,
@@ -9,16 +7,16 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import React, { createRef, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import AssistWalkerIcon from "@mui/icons-material/AssistWalker";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
-import { useBills } from "@/hooks/useBills";
-import { RandomId } from "@/util/RandomId";
-import { AccountCircle } from "@mui/icons-material";
 import FaceIcon from "@mui/icons-material/Face";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import SelectInput from "./SelectInput";
+import { HeaderWapper } from "./style";
+import { RandomId } from "@/util/RandomId";
+import { useTaker, usePurpose, useFountainhead } from "@/hooks";
 
 const EditDiglog: React.FC<{
   handleClose: () => any;
@@ -27,7 +25,8 @@ const EditDiglog: React.FC<{
   const [isIncome, setIsIncome] = useState(false);
   const { data: Takers } = useTaker();
   const { data: Purposes } = usePurpose();
-  const { Add } = useBills();
+  const { data: Fountainhead } = useFountainhead();
+  // TODO: 这里想用useRef来获取表单内容但是获取不到
   const TakeRef = useRef(null);
   const PurposeRef = useRef(null);
   const AmountRef = useRef(null);
@@ -54,18 +53,20 @@ const EditDiglog: React.FC<{
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>
-        <Box textAlign="center" style={{ fontSize: "28px" }}>
-          {isIncome ? (
-            <AssistWalkerIcon style={{ verticalAlign: "middle" }} />
-          ) : (
-            <AddReactionIcon style={{ verticalAlign: "middle" }} />
-          )}{" "}
-          {isIncome ? "花了一笔" : "获得收入"}{" "}
-          <CompareArrowsIcon
-            onClick={() => setIsIncome((pre) => !pre)}
-            style={{ verticalAlign: "middle" }}
-          />
-        </Box>
+        <HeaderWapper>
+          <Box textAlign="center" className="box">
+            {isIncome ? (
+              <AssistWalkerIcon className="icon" />
+            ) : (
+              <AddReactionIcon className="icon" />
+            )}{" "}
+            {isIncome ? "花了一笔" : "获得收入"}{" "}
+            <CompareArrowsIcon
+              onClick={() => setIsIncome((pre) => !pre)}
+              className="icon switch"
+            />
+          </Box>
+        </HeaderWapper>
       </DialogTitle>
       <FormControl>
         <Grid
@@ -85,7 +86,7 @@ const EditDiglog: React.FC<{
           <Grid xs={6} item>
             <SelectInput
               label={`${isIncome ? "收入来源" : "支出原因"}`}
-              SelectList={Purposes}
+              SelectList={isIncome ? Purposes : Purposes}
               icon={<CurrencyExchangeIcon />}
             />
           </Grid>
@@ -104,7 +105,7 @@ const EditDiglog: React.FC<{
               id="date"
               label="日期"
               type="date"
-              style={{ width: 220 }}
+              style={{ width: "100%" }}
               InputLabelProps={{
                 shrink: true,
               }}

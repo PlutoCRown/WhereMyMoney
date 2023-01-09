@@ -12,9 +12,29 @@ export const HomePageWapper = styled(Box)`
 `;
 
 export const HomeNavWapper = styled(Box)`
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .tab {
+    min-height: 66px;
+  }
+  .titleWapper {
+    user-select: none;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+    backdrop-filter: blur(6px);
+  }
+  .title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 32px;
+  }
+  position: relative;
   width: 300px;
   max-height: 97vh;
-  overflow: hidden;
+  overflow: scroll;
 `;
 
 export const HomeContentWapper = styled(Box)`
