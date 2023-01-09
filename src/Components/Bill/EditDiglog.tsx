@@ -38,15 +38,13 @@ const EditDiglog: React.FC<{
   const submit = () => {
     const data = {
       id: RandomId(),
-      date: DateRef.current! as any,
-      Taker: TakeRef.current! as any,
-      Purpose: PurposeRef.current! as any,
-      Amount: AmountRef.current! as any,
+      date: (DateRef.current! as any).value,
+      Taker: (TakeRef.current! as any).value,
+      Purpose: (PurposeRef.current! as any).value,
+      Amount: (AmountRef.current! as any).value,
       Remark: (RemarkRef.current! as any).value,
     };
     console.log(data);
-    console.log(Takers);
-
     // Add();
     // handleClose();
   };
@@ -81,6 +79,7 @@ const EditDiglog: React.FC<{
               label={`${isIncome ? "收入" : "支出"}所属`}
               SelectList={Takers}
               icon={<FaceIcon />}
+              Iref={TakeRef}
             />
           </Grid>
           <Grid xs={6} item>
@@ -88,6 +87,7 @@ const EditDiglog: React.FC<{
               label={`${isIncome ? "收入来源" : "支出原因"}`}
               SelectList={isIncome ? Purposes : Purposes}
               icon={<CurrencyExchangeIcon />}
+              Iref={PurposeRef}
             />
           </Grid>
           <Grid xs={11} item>
@@ -97,7 +97,9 @@ const EditDiglog: React.FC<{
               id="amount"
               label={`${isIncome ? "收入" : "支出"}金额`}
               type="number"
-              ref={AmountRef}
+              inputProps={{
+                ref: AmountRef,
+              }}
             />
           </Grid>
           <Grid xs={11} item>
@@ -109,6 +111,7 @@ const EditDiglog: React.FC<{
               InputLabelProps={{
                 shrink: true,
               }}
+              inputRef={DateRef}
             />
           </Grid>
           <Grid xs={11} item>
@@ -120,7 +123,9 @@ const EditDiglog: React.FC<{
               rows={4}
               defaultValue=""
               variant="standard"
-              ref={RemarkRef}
+              inputProps={{
+                ref: RemarkRef,
+              }}
             />
           </Grid>
           <Grid xs={12} item>

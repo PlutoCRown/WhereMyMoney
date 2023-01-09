@@ -21,7 +21,8 @@ const SelectInput: React.FC<{
   SelectList: listType[];
   label: string;
   icon?: ReactNode;
-}> = ({ label, icon }) => {
+  Iref?: any;
+}> = ({ label, icon, Iref }) => {
   const [value, setValue] = React.useState<FilmOptionType | null>(null);
 
   return (
@@ -86,6 +87,7 @@ const SelectInput: React.FC<{
               <InputAdornment position="start">{icon}</InputAdornment>
             ),
           }}
+          inputRef={Iref}
         />
       )}
     />
