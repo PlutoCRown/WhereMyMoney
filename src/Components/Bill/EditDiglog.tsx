@@ -32,9 +32,7 @@ const EditDiglog: React.FC<{
   const RemarkRef = useRef(null);
   const DateRef = useRef(null);
   const { Add } = useBills();
-  // const [value, setValue] = React.useState<{ name: string; id: string } | null>(
-  //   null
-  // );
+
   const submit = () => {
     const data = {
       id: crypto.randomUUID(),
@@ -144,8 +142,3 @@ const EditDiglog: React.FC<{
 };
 
 export default EditDiglog;
-
-// const Wapper = styled(Box)`
-//   width: 300px;
-//   padding: 20px;
-// `;

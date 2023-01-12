@@ -1,13 +1,18 @@
 import { useTaker } from "@/hooks/useTaker";
-import Chips from "./Chips";
+import EditChips from "./EditChips";
 
 const EditTaker = () => {
-  const { data: Takers, Add, rename } = useTaker();
-
+  const { data: Takers, Add, rename, del } = useTaker();
   return (
     <div>
-      <h2>编辑所属人</h2>
-      <Chips List={Takers} Add={Add} rename={rename} color="info" />
+      <EditChips
+        data={Takers}
+        Add={Add}
+        rename={rename}
+        title="编辑所属人"
+        color="info"
+        del={del}
+      />
     </div>
   );
 };

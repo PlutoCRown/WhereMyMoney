@@ -81,4 +81,4 @@ const CloudSync = () => {
   );
 };
 
-export default CloudSync;
+export default { UI: <CloudSync /> };

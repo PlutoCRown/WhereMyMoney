@@ -1,4 +1,3 @@
-import { Add } from "@mui/icons-material";
 import { Stack, Chip, Input } from "@mui/material";
 import React, { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
@@ -6,9 +5,11 @@ import AddIcon from "@mui/icons-material/Add";
 import { ChipsWapper } from "./style";
 
 const Chips: React.FC<{
+  open: (item: any) => void;
   List: { id: string; name: string }[];
   Add: (callback: any) => any;
   rename: (id: string, name: string) => any;
+  renameing: { id: string; name: string } | null;
   color?:
     | "default"
     | "error"
@@ -17,9 +18,9 @@ const Chips: React.FC<{
     | "secondary"
     | "success"
     | "warning";
-}> = ({ List, Add, rename, color }) => {
-  const [cur, setCur] = useState<{ id: string; name: string } | null>(null);
+}> = ({ List, Add, rename, color, renameing, open }) => {
   const [value, setValue] = useState("");
+
   return (
     <ChipsWapper>
       <Stack direction="row" spacing={1}>
@@ -27,7 +28,7 @@ const Chips: React.FC<{
           <Chip
             className="chip"
             label={
-              cur == i ? (
+              renameing == i ? (
                 <Input
                   autoFocus
                   style={{
@@ -43,13 +44,14 @@ const Chips: React.FC<{
             }
             deleteIcon={<CheckIcon />}
             onDelete={
-              cur == i
-                ? () => (rename(cur.id, value), setCur(null), setValue(""))
+              renameing == i
+                ? () => (rename(renameing.id, value), setValue(""))
                 : undefined
             }
             color={color}
             key={i.id}
             clickable
+            onClick={() => open(i)}
           />
         ))}
         <Chip
@@ -57,7 +59,7 @@ const Chips: React.FC<{
           color={color}
           icon={<AddIcon />}
           clickable
-          onClick={() => cur == null && Add(setCur)}
+          onClick={Add}
         />
       </Stack>
     </ChipsWapper>

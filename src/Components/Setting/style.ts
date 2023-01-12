@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const ChipsWapper = styled(Box)`
-  .chip {
+  /* .chip {
     animation: 0.2s ww forwards;
     @keyframes ww {
       0% {
@@ -27,5 +27,5 @@ export const ChipsWapper = styled(Box)`
         }
       }
     }
-  }
+  } */
 `;

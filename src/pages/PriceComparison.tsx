@@ -1,9 +1,12 @@
-import React from 'react'
+import ShoppingList from "@/Components/PriceComparison/ShoppingList";
+import React from "react";
 
 const PriceComparison = () => {
   return (
-    <div>PriceComparison</div>
-  )
-}
+    <div>
+      <ShoppingList />
+    </div>
+  );
+};
 
-export default PriceComparison
+export default PriceComparison;

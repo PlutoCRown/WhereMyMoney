@@ -1,16 +1,26 @@
 import { Box, Dialog, Grid, Switch } from "@mui/material";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import { DialogWapper, PluginCard } from "./style";
 import { TupleType } from "@/util/TupleType";
 import CloudSync from "./CloudSync/config";
 
+type PluginItem = {
+  name: string;
+  cfg: {
+    UI?: ReactNode;
+    onEnable?: () => any;
+    onDisable?: () => any;
+  };
+  enable: boolean;
+};
+
 const PluginList = () => {
-  const Plugins_init = [
-    { name: "云同步  ", cfg: <CloudSync />, enable: false },
-    { name: "占位测试", cfg: <CloudSync />, enable: false },
-    { name: "外部数据", cfg: <CloudSync />, enable: true },
-    { name: "自动任务", cfg: <CloudSync />, enable: true },
+  const Plugins_init: PluginItem[] = [
+    { name: "云同步  ", cfg: CloudSync, enable: false },
+    { name: "占位测试", cfg: {}, enable: false },
+    { name: "外部数据", cfg: {}, enable: true },
+    { name: "自动任务", cfg: {}, enable: true },
   ];
   const [Plugins, setPlugins] = useState(Plugins_init);
 
@@ -24,7 +34,7 @@ const PluginList = () => {
 
   const openConfig = (item: TupleType<typeof Plugins>) => {
     setCur(item);
-    setOpen(true);
+    if (item.cfg.UI != undefined) setOpen(true);
   };
 
   return (
@@ -51,7 +61,7 @@ const PluginList = () => {
       </Box>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>{`${cur.name} - 设置`}</DialogTitle>
-        <DialogWapper>{cur.cfg}</DialogWapper>
+        <DialogWapper>{cur.cfg.UI ? cur.cfg.UI : <></>}</DialogWapper>
       </Dialog>
     </div>
   );

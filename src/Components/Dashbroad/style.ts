@@ -38,7 +38,6 @@ export const Shorthand = styled(Card)`
   overflow: hidden;
   grid-area: shorthand;
   min-width: 200px;
-  max-width: 340px;
   display: inherit;
 `;
 
@@ -56,6 +55,15 @@ export const Expenditure = styled(Card)`
 
 export const Tips = styled(Card)`
   grid-area: Tips;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.02);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 
 export const BillWapper = styled(Box)`

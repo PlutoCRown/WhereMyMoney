@@ -9,8 +9,8 @@ import {
 } from "@/Components/Dashbroad/style";
 import Tip from "@/Components/Dashbroad/Tip";
 import TodoList from "@/Components/Dashbroad/TodoList";
-import { Box } from "@mui/material";
 import React from "react";
+
 export default () => {
   return (
     <GridContainer>
@@ -23,17 +23,14 @@ export default () => {
         <TodoList />
       </TODO>
       <Income>
-        <b className="title">今日收入</b>
-        <div className="num green">￥666.22</div>
+        <b className="title">今日收支</b>
+        <div className="num green">-￥666.22</div>
       </Income>
       <Expenditure>
-        <b className="title">今日支出</b>
+        <b className="title">当前存款</b>
         <div className="num red">￥888.52</div>
       </Expenditure>
-      <Tips>
-        <b className="title">Tips</b>
-        <Tip></Tip>
-      </Tips>
+      <Tip></Tip>
     </GridContainer>
   );
 };

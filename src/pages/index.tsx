@@ -23,12 +23,13 @@ export default function HomePage() {
   const panel = [
     { name: "看板", value: "dashbroad", icon: <CameraIcon /> },
     { name: "账单", value: "bill", icon: <AssignmentIcon /> },
-    { name: "自动任务", value: "auto-task", icon: <AccessAlarmIcon /> },
-    { name: "性价比", value: "price-comparison", icon: <CalculateIcon /> },
-    { name: "外部数据", value: "external-data", icon: <BlindsClosedIcon /> },
+    // { name: "自动任务", value: "auto-task", icon: <AccessAlarmIcon /> },
+    // { name: "性价比", value: "price-comparison", icon: <CalculateIcon /> },
+    // { name: "外部数据", value: "external-data", icon: <BlindsClosedIcon /> },
     { name: "插件", value: "plug-in", icon: <ExtensionIcon /> },
     { name: "设置", value: "setting", icon: <SettingsIcon /> },
   ];
+
   return (
     <>
       <HomePageWapper>

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-export const useBills = () => {
-  const [data, setData] = useState<BillTData[]>([
+export const useShoppingList = () => {
+  const [data, setData] = useState<ShoppingData[]>([
     {
-      Amount: -0,
-      Reason: "123",
-      Remark: "312",
-      Taker: "123",
+      id: "string",
       date: new Date(),
-      id: "81ccf8a8-dacd-4361-b121-5c83e2031fb4",
+      name: "item",
+      price: 12345,
+      coefficient: 5 / 7,
+      Remark: "string",
     },
   ]);
 
@@ -16,7 +16,7 @@ export const useBills = () => {
     console.log(data);
   }, [data]);
 
-  const Add = (n: BillTData) => {
+  const Add = (n: ShoppingData) => {
     data.unshift(n);
     setData([...data]);
     console.log(n);
@@ -38,11 +38,11 @@ export const useBills = () => {
   };
 };
 
-export type BillTData = {
+export type ShoppingData = {
   id: string;
   date: Date;
-  Taker: string;
-  Reason: string;
-  Amount: number;
+  name: string;
+  coefficient: number;
+  price: number;
   Remark: string;
 };
