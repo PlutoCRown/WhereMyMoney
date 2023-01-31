@@ -4,27 +4,22 @@ import { useLocalStorage } from "./Memories/useLocalStorage";
 
 const storage = useLocalStorage<BillTData[]>("BillData");
 
-const init = storage.get([
-  {
-    Amount: -0,
-    Reason: "123",
-    Remark: "312",
-    Taker: "123",
-    date: new Date(),
-    id: "81ccf8a8-dacd-4361-b121-5c83e2031fb4",
-  },
-]);
+const init = storage
+  .get([])
+  .map((i) => ({ ...i, date: new Date(Date.parse(i.date as any)) }));
 
 export const useBills = () => {
   const [data, setData] = useState<BillTData[]>(init);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const alter = (data: typeof init) => {
+    setData(data);
+    storage.set(data);
+  };
 
   const Add = (n: BillTData) => {
+    // 那个MUIX组件拿到的time似乎是字符串？
+    n.date = new Date(Date.parse(n.date as any));
     data.unshift(n);
-    setData([...data]);
+    alter([...data]);
     console.log(n);
   };
 

@@ -18,7 +18,8 @@ type PluginItem = {
 const PluginList = () => {
   const Plugins_init: PluginItem[] = [
     { name: "云同步  ", cfg: CloudSync, enable: false },
-    { name: "占位测试", cfg: {}, enable: false },
+    { name: "开关还是没用的", cfg: {}, enable: false },
+    { name: "插件应该是解耦合的", cfg: {}, enable: false },
     { name: "外部数据", cfg: {}, enable: true },
     { name: "自动任务", cfg: {}, enable: true },
   ];

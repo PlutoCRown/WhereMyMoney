@@ -13,9 +13,8 @@ const Plugin = () => {
   ];
 
   return (
-    <div>
-      {/* 使用transform使 stackContext落到此层 */}
-      <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
+    <div style={{ position: "relative", height: "100% " }}>
+      <Box sx={{ flexGrow: 1 }}>
         <PluginList />
         <SpeedDial
           ariaLabel="SpeedDial"

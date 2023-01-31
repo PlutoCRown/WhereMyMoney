@@ -28,8 +28,6 @@ export default () => {
 
   return (
     <div>
-      <Button onClick={del}>inter LOG</Button>
-      <Button onClick={() => console.log(data)}>outer LOG</Button>
       <BillTable data={data} Add={handleOpen} />
       <EditDiglog open={open} handleClose={handleClose}></EditDiglog>
     </div>

@@ -5,7 +5,7 @@ import { useLocalStorage } from "../Memories/useLocalStorage";
 
 const storage = useLocalStorage<ChipType[]>("Fountainhead");
 
-const config = storage.get([
+const init = storage.get([
   {
     id: "1",
     name: "Work",
@@ -16,7 +16,12 @@ const config = storage.get([
   },
 ]);
 export const useFountainhead = () => {
-  const [Fountainhead, setFountainhead] = useState(config);
+  const [Fountainhead, setFountainhead] = useState(init);
+  const alter = (data: typeof init) => {
+    setFountainhead(data);
+    storage.set(data);
+  };
+
   return {
     data: Fountainhead,
     Add: (callback: any) => {
@@ -25,16 +30,16 @@ export const useFountainhead = () => {
         name: "",
       };
       Fountainhead.push(n);
-      setFountainhead([...Fountainhead]);
+      alter([...Fountainhead]);
       callback(n);
     },
     rename: (id: string, name: string) => {
       if (name == "") return;
       Fountainhead.filter((i) => i.id == id)[0].name = name;
-      setFountainhead([...Fountainhead]);
+      alter([...Fountainhead]);
     },
     del: (id: string) => {
-      setFountainhead([...Fountainhead.filter((i) => i.id != id)]);
+      alter([...Fountainhead.filter((i) => i.id != id)]);
     },
   };
 };
