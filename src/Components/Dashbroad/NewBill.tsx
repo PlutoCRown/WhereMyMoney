@@ -1,5 +1,5 @@
-import { usePurpose } from "@/hooks/usePurpose";
-import { useTaker } from "@/hooks/useTaker";
+import { usePurpose } from "@/hooks/Tags/usePurpose";
+import { useTaker } from "@/hooks/Tags/useTaker";
 import {
   Dialog,
   DialogTitle,

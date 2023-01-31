@@ -1,7 +1,10 @@
+import { ChipType } from "@/types";
 import { RandomId } from "@/util/RandomId";
 import { useState } from "react";
+import { useLocalStorage } from "../Memories/useLocalStorage";
 
-const config = [
+const storage = useLocalStorage<ChipType[]>("Taker");
+const init = storage.get([
   {
     id: "1",
     name: "我",
@@ -10,10 +13,15 @@ const config = [
     id: "2",
     name: "你",
   },
-];
+]);
 
 export const useTaker = () => {
-  const [Taker, setTaker] = useState(config);
+  const [Taker, setTaker] = useState(init);
+  const alter = (data: typeof init) => {
+    setTaker(data);
+    storage.set(data);
+  };
+
   return {
     data: Taker,
     Add: (callback: any) => {
@@ -22,16 +30,16 @@ export const useTaker = () => {
         name: "",
       };
       Taker.push(n);
-      setTaker([...Taker]);
+      alter([...Taker]);
       callback(n);
     },
     rename: (id: string, name: string) => {
       if (name == "") return;
       Taker.filter((i) => i.id == id)[0].name = name;
-      setTaker([...Taker]);
+      alter([...Taker]);
     },
     del: (id: string) => {
-      setTaker([...Taker.filter((i) => i.id != id)]);
+      alter([...Taker.filter((i) => i.id != id)]);
     },
   };
 };

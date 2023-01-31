@@ -1,4 +1,4 @@
-import { useTaker } from "@/hooks/useTaker";
+import { useTaker } from "@/hooks/Tags/useTaker";
 import EditChips from "./EditChips";
 
 const EditTaker = () => {

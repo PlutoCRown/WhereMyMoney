@@ -23,15 +23,30 @@ const EditDiglog: React.FC<{
   open: boolean;
 }> = ({ handleClose, open }) => {
   const [isIncome, setIsIncome] = useState(false);
-  const { data: Takers } = useTaker();
-  const { data: Purposes } = usePurpose();
-  const { data: Fountainhead } = useFountainhead();
+  const { data: Takers, Add: AddTaker, rename: reTaker } = useTaker();
+  const { data: Purposes, Add: AddPurpose, rename: rePurpose } = usePurpose();
+  const {
+    data: Fountainhead,
+    Add: AddFountainhead,
+    rename: reFountainhead,
+  } = useFountainhead();
   const TakeRef = useRef(null);
   const PurposeRef = useRef(null);
   const AmountRef = useRef(null);
   const RemarkRef = useRef(null);
   const DateRef = useRef(null);
   const { Add } = useBills();
+
+  const AddByName = (AddFn: any, RenameFn: any) => {
+    return (name: string) => {
+      let data = { id: "", name: "" };
+      AddFn((newData: any) => {
+        data = newData;
+        RenameFn(newData.id, name);
+      });
+      return data;
+    };
+  };
 
   const submit = () => {
     const data = {
@@ -45,6 +60,7 @@ const EditDiglog: React.FC<{
     Add(data);
     handleClose();
   };
+
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>
@@ -77,6 +93,7 @@ const EditDiglog: React.FC<{
               SelectList={Takers}
               icon={<FaceIcon />}
               Iref={TakeRef}
+              CreateFn={AddByName(AddTaker, reTaker)}
             />
           </Grid>
           <Grid xs={6} item>
@@ -85,6 +102,11 @@ const EditDiglog: React.FC<{
               SelectList={isIncome ? Fountainhead : Purposes}
               icon={<CurrencyExchangeIcon />}
               Iref={PurposeRef}
+              CreateFn={
+                isIncome
+                  ? AddByName(AddFountainhead, reFountainhead)
+                  : AddByName(AddPurpose, rePurpose)
+              }
             />
           </Grid>
           <Grid xs={11} item>

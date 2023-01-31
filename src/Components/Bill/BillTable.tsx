@@ -13,7 +13,7 @@ import {
 } from "./style";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import AddchartIcon from "@mui/icons-material/Addchart";
-import { BillTData } from "@/hooks/useBills";
+import { BillTData } from "@/types";
 
 const BillTable: React.FC<{
   data: BillTData[];

@@ -1,4 +1,4 @@
-import { usePurpose } from "@/hooks/usePurpose";
+import { usePurpose } from "@/hooks/Tags/usePurpose";
 import EditChips from "./EditChips";
 
 const EditPurpose = () => {

@@ -1,7 +1,11 @@
+import { ChipType } from "@/types";
 import { RandomId } from "@/util/RandomId";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocalStorage } from "../Memories/useLocalStorage";
 
-const config = [
+const storage = useLocalStorage<ChipType[]>("Purpose");
+
+const init = storage.get([
   {
     id: "1",
     name: "🍔饮食",
@@ -10,10 +14,15 @@ const config = [
     id: "2",
     name: "🛻交通",
   },
-];
+]);
 
 export const usePurpose = () => {
-  const [Purpose, setPurpose] = useState(config);
+  const [Purpose, setPurpose] = useState(init);
+  const alter = (data: typeof init) => {
+    setPurpose(data);
+    storage.set(data);
+  };
+
   return {
     data: Purpose,
     Add: (callback: any) => {
@@ -22,16 +31,16 @@ export const usePurpose = () => {
         name: "",
       };
       Purpose.push(n);
-      setPurpose([...Purpose]);
+      alter([...Purpose]);
       callback(n);
     },
     rename: (id: string, name: string) => {
       if (name == "") return;
       Purpose.filter((i) => i.id == id)[0].name = name;
-      setPurpose([...Purpose]);
+      alter([...Purpose]);
     },
     del: (id: string) => {
-      setPurpose([...Purpose.filter((i) => i.id != id)]);
+      alter([...Purpose.filter((i) => i.id != id)]);
     },
   };
 };

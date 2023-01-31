@@ -1,7 +1,11 @@
+import { ChipType } from "@/types";
 import { RandomId } from "@/util/RandomId";
 import { useState } from "react";
+import { useLocalStorage } from "../Memories/useLocalStorage";
 
-const config = [
+const storage = useLocalStorage<ChipType[]>("Fountainhead");
+
+const config = storage.get([
   {
     id: "1",
     name: "Work",
@@ -10,8 +14,7 @@ const config = [
     id: "2",
     name: "SideProject",
   },
-];
-
+]);
 export const useFountainhead = () => {
   const [Fountainhead, setFountainhead] = useState(config);
   return {
