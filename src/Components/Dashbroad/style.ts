@@ -4,10 +4,10 @@ import { styled } from "@mui/material/styles";
 export const GridContainer = styled(Box)`
   display: grid;
   grid-template-areas:
-    "shorthand TODO Income"
-    "shorthand TODO Expenditure"
-    "shorthand TODO Tips"
-    "shorthand TODO Tips";
+    "TODO TODO Income"
+    "TODO TODO Expenditure"
+    "RadialView RadialView Tips"
+    "RadialView RadialView Tips";
   --radius: 20px;
 `;
 
@@ -23,7 +23,7 @@ const Card = styled(Paper)`
   }
   .num {
     font-weight: 2;
-    font-size: 48px;
+    font-size: 32px;
     font-family: "KaiTi";
   }
   .green {
@@ -35,13 +35,16 @@ const Card = styled(Paper)`
 `;
 
 export const Shorthand = styled(Card)`
-  overflow: hidden;
-  grid-area: shorthand;
+  overflow: visible;
+  grid-area: RadialView;
   min-width: 200px;
+  max-height: 240px;
   display: inherit;
 `;
 
 export const TODO = styled(Card)`
+  overflow: visible;
+  max-height: 220px;
   grid-area: TODO;
 `;
 
