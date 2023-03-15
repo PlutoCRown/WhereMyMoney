@@ -42,9 +42,9 @@ export const HomeNavWapper = styled(Box)`
 `;
 
 export const HomeContentWapper = styled(Box)`
+  box-sizing: border-box;
   width: 98%;
-  height: 90vh;
-  max-height: 97vh;
+  height: 100vh;
   overflow: hidden;
   padding: 20px;
 `;

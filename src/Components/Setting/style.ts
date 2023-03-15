@@ -29,3 +29,12 @@ export const ChipsWapper = styled(Box)`
     }
   } */
 `;
+
+export const BaseLine = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  .icon {
+    vertical-align: text-bottom;
+  }
+  /* text-align: center; */
+`;

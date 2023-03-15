@@ -9,7 +9,8 @@ const EditPurpose = () => {
         data={Purposes}
         Add={Add}
         rename={rename}
-        title="编辑所属人"
+        BillLoc={(i) => i.Reason}
+        title="编辑支出原因"
         color="success"
         del={del}
       />

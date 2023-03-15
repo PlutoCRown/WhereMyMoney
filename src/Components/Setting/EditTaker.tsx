@@ -9,6 +9,7 @@ const EditTaker = () => {
         data={Takers}
         Add={Add}
         rename={rename}
+        BillLoc={(i) => i.Taker}
         title="编辑所属人"
         color="info"
         del={del}

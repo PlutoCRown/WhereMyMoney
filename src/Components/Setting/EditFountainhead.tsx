@@ -11,7 +11,8 @@ const EditFountainhead = () => {
         data={Fountainhead}
         Add={Add}
         rename={rename}
-        title="编辑所属人"
+        BillLoc={(i) => i.Reason}
+        title="编辑收入来源"
         color="warning"
         del={del}
       />
