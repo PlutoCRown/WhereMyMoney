@@ -51,7 +51,18 @@ export const useRadial = (props: {
     .animate("enter", { type: "waveIn" })
     .legend(false)
     .interaction("elementHighlight")
-    .interaction("tooltip");
+    .interaction("tooltip", {
+      render: (event: any, args: any) => {
+        console.log("Tooltip", event, args);
+        return (
+          // <>
+          //   <div>自定义内容{args.item}</div>
+          //   <div>自定义内容{event.data.data.id}</div>
+          // </>
+          12344
+        );
+      },
+    });
 
   chart.render();
 

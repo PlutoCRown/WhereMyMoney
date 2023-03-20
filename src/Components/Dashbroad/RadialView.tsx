@@ -28,6 +28,8 @@ const genData = (
 };
 
 const RadialView = () => {
+  console.log("canvas reload");
+
   const chart1 = useRef<HTMLDivElement>(null);
   const chart2 = useRef<HTMLDivElement>(null);
 
@@ -40,7 +42,6 @@ const RadialView = () => {
 
   // TODO: 这里很卡！ 请不要卸载此组件！
   useEffect(() => {
-    console.log("创建实例");
     let ins1: any = chart1.current
       ? useRadial({ container: chart1.current, data: data1 })
       : {};
@@ -48,7 +49,6 @@ const RadialView = () => {
       ? useRadial({ container: chart2.current, data: data2 })
       : {};
     return () => {
-      console.log("清除实例");
       ins1 = null;
       ins2 = null;
     };
@@ -62,4 +62,4 @@ const RadialView = () => {
   );
 };
 
-export default RadialView;
+export default React.memo(RadialView);

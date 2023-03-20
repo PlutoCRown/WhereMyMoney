@@ -19,10 +19,6 @@ export default () => {
   const [open, setOpen] = useState(false);
   const { data, del } = useBills();
 
-  useEffect(() => {
-    console.log("123", data);
-  }, [data]);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

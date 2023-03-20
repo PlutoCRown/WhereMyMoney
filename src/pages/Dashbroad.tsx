@@ -1,5 +1,6 @@
 import Cumulative from "@/Components/Dashbroad/Cumulative";
-import RadialView from "@/Components/Dashbroad/RadialView";
+const RadialView = lazy(() => import("@/Components/Dashbroad/RadialView"));
+const LineView = lazy(() => import("@/Components/Dashbroad/LineView"));
 import {
   Expenditure,
   GridContainer,
@@ -9,16 +10,22 @@ import {
 } from "@/Components/Dashbroad/style";
 import Tip from "@/Components/Dashbroad/Tip";
 import TodayRunning from "@/Components/Dashbroad/TodayRunning";
-import LineView from "@/Components/Dashbroad/LineView";
+import { lazy, Suspense } from "react";
 
 export default () => {
+  console.log("dashbroad reload");
+
   return (
     <GridContainer>
       <Shorthand>
-        <RadialView />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <RadialView />
+        </Suspense>
       </Shorthand>
       <TODO>
-        <LineView />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <LineView />
+        </Suspense>
       </TODO>
       <Income>
         <b className="title">今日收支</b>

@@ -1,6 +1,11 @@
 import { Chart } from "@antv/g2";
+import { Moment } from "moment";
 
-export const useCell = (props: { container: HTMLElement; data: number[] }) => {
+export const useCell = (props: {
+  container: HTMLElement;
+  data: number[];
+  startday: Moment;
+}) => {
   const chart = new Chart({
     container: props.container,
     width: 600,
@@ -24,12 +29,22 @@ export const useCell = (props: { container: HTMLElement; data: number[] }) => {
       (_: any, i: any) =>
         `周${["一", "二", "三", "四", "五", "六", "日"][i % 7]}`
     )
-    .encode("x", (_: any, i: any) => ((i / 7) | 0) + 1)
+    // 这个值相同，才会在一列
+
+    .encode(
+      "x",
+      (_: any, i: any) => ((((i / 7) | 0) + props.startday.week()) % 52) + 1
+    )
     .encode("color", "存款变化")
     .style("stroke", "#000")
     .style("inset", 2)
     .animate("enter", { type: "fadeIn" })
-    .interaction("tooltip");
+    .interaction("tooltip", {
+      render: (event: any, cur: any) => {
+        console.log(event);
+        return `第${cur.items[0].value}周${cur.items[1].value}，变化：${1}`;
+      },
+    });
 
   chart.render();
   return chart;
