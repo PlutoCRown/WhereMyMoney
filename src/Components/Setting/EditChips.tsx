@@ -7,6 +7,7 @@ import Chips from "./Chips";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { BaseLine } from "./style";
 import SimpleTable from "./SimpleTable";
+import { useMergeState } from "@/util/useMergeState";
 const EditChips: React.FC<{
   data: ChipType[];
   Add: (callback: any) => void;
@@ -23,11 +24,15 @@ const EditChips: React.FC<{
     | "success"
     | "warning";
 }> = ({ data, Add, rename, del, title, color, BillLoc }) => {
-  const [open, setOpen] = useState(false);
-  const [deling, setDeling] = useState(false);
+  const [modal, setModal] = useMergeState({
+    detail: false,
+    delete: false,
+    adding: false,
+  });
   const [confirm, setConfirm] = useState<
     "unComfirm" | "del&Disassociate" | "del&deleteBill"
   >("unComfirm");
+
   const [opening, setOpening] = useState<ChipType | null>(null);
   const [cur, setCur] = useState<ChipType | null>(null);
   const { data: Bill } = useBills();
@@ -40,15 +45,15 @@ const EditChips: React.FC<{
   const OpenDialog = (item: any) => {
     if (cur != item) {
       setOpening(item);
-      setOpen(true);
+      setModal({ detail: true });
     }
   };
   const handleDelete = () => {
     if (opening) {
       del(opening.id);
-      setOpen(false);
+      setModal({ detail: false });
       setOpening(null);
-      setDeling(false);
+      setModal({ delete: false });
     }
   };
 
@@ -63,7 +68,8 @@ const EditChips: React.FC<{
         open={OpenDialog}
         renameing={cur}
       />
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      {/* 修改 */}
+      <Dialog open={modal.detail} onClose={() => setModal({ detail: false })}>
         {opening && (
           <>
             <DialogTitle>
@@ -73,7 +79,9 @@ const EditChips: React.FC<{
                   <BorderColorIcon className="icon" />
                 </span>
                 <Button
-                  onClick={() => (setDeling(true), setConfirm("unComfirm"))}
+                  onClick={() => (
+                    setModal({ delete: true }), setConfirm("unComfirm")
+                  )}
                 >
                   删除
                 </Button>
@@ -81,7 +89,7 @@ const EditChips: React.FC<{
             </DialogTitle>
             <SimpleTable data={filteredBill} />
             <Button
-              onClick={() => (setOpen(false), setOpening(null))}
+              onClick={() => (setModal({ detail: false }), setOpening(null))}
               variant="contained"
             >
               关闭
@@ -89,7 +97,8 @@ const EditChips: React.FC<{
           </>
         )}
       </Dialog>
-      <Dialog open={deling} onClose={() => setDeling(false)}>
+      {/* 删除 */}
+      <Dialog open={modal.delete} onClose={() => setModal({ delete: false })}>
         <DialogTitle>
           {confirm == "unComfirm"
             ? "你要删除这个标签吗？"
@@ -111,6 +120,29 @@ const EditChips: React.FC<{
           <Button onClick={handleDelete} variant="contained">
             确认删除
           </Button>
+        )}
+      </Dialog>
+      {/* 新增 */}
+      <Dialog open={modal.adding} onClose={() => setModal({ adding: false })}>
+        {opening && (
+          <>
+            <DialogTitle>
+              <BaseLine>
+                <span>
+                  {`${opening.name} 相关的 ${filteredBill.length} 条数据`}
+                  <BorderColorIcon className="icon" />
+                </span>
+                <Button>选择一个Emoji</Button>
+              </BaseLine>
+            </DialogTitle>
+            <Button>挑选个颜色？</Button>
+            <Button
+              onClick={() => (setModal({ adding: false }), setOpening(null))}
+              variant="contained"
+            >
+              确认
+            </Button>
+          </>
         )}
       </Dialog>
     </div>

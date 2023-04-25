@@ -3,21 +3,15 @@ import React, { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import AddIcon from "@mui/icons-material/Add";
 import { ChipsWapper } from "./style";
+import { ChipType, TagColor } from "@/types";
 
 const Chips: React.FC<{
   open: (item: any) => void;
-  List: { id: string; name: string }[];
+  List: ChipType[];
   Add: (callback: any) => any;
   rename: (id: string, name: string) => any;
-  renameing: { id: string; name: string } | null;
-  color?:
-    | "default"
-    | "error"
-    | "info"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning";
+  renameing: ChipType | null;
+  color?: TagColor;
 }> = ({ List, Add, rename, color, renameing, open }) => {
   const [value, setValue] = useState("");
 

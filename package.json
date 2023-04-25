@@ -2,12 +2,24 @@
   "private": true,
   "author": "PlutoCRown <minecrafttmi@foxmail.com>",
   "homepage": "https://plutocrown.github.io/WhereMyMoney",
+  "main": "main.js",
+  "build": {
+    "appId": "com.syanine.wheremymoney",
+    "productName": "Where My Money",
+    "files": [
+      "/dist/**/*",
+      "node_modules/**/*",
+      "!node_modules/electron/**/*",
+      "!node_modules/electron-builder/**/*"
+    ]
+  },
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
     "start": "npm run dev",
+    "exe": "electron .",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },

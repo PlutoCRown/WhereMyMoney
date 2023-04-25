@@ -16,3 +16,5 @@
 # 设置
 
 !! mui中 textfield 中input的属性要写在inputprops
+
+git subtree push --prefix dist origin gh-pages

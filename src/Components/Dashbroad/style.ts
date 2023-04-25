@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 
 export const GridContainer = styled(Box)`
   display: grid;
+  width: 100%;
   grid-template-areas:
     "TODO TODO Income"
     "TODO TODO Expenditure"
@@ -71,7 +72,7 @@ export const Tips = styled(Card)`
 
 export const BillWapper = styled(Box)`
   margin-top: 20px;
-  min-height: 73vh;
+  /* min-height: 73vh; */
 `;
 
 export const TodoListWapper = styled(Box)`

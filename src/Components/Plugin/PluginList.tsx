@@ -2,7 +2,7 @@ import { Box, Dialog, Grid, Switch } from "@mui/material";
 import React, { ReactNode, useState } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import { DialogWapper, PluginCard } from "./style";
-import { TupleType } from "@/util/TupleType";
+import { TupleType } from "@/types/TupleType";
 import CloudSync from "./CloudSync/config";
 
 type PluginItem = {

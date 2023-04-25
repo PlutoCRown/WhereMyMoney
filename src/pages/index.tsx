@@ -1,5 +1,5 @@
 import { Stack, Tab, Tabs } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, history } from "umi";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import CameraIcon from "@mui/icons-material/Camera";
@@ -9,6 +9,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import { HomeContentWapper, HomeNavWapper, HomePageWapper } from "./style";
 import ExtensionIcon from "@mui/icons-material/Extension";
+import GlobalContext from "@/Context";
 
 export default function HomePage() {
   if (history.location.pathname === "/") history.push("dashbroad");
@@ -19,6 +20,10 @@ export default function HomePage() {
     history.push(newValue);
     serCur(newValue);
   };
+
+  useEffect(() => {
+    console.log("怎么会更新呢");
+  }, []);
 
   const panel = [
     { name: "看板", value: "dashbroad", icon: <CameraIcon /> },
@@ -55,7 +60,9 @@ export default function HomePage() {
           </Tabs>
         </HomeNavWapper>
         <HomeContentWapper>
-          <Outlet />
+          <GlobalContext>
+            <Outlet />
+          </GlobalContext>
         </HomeContentWapper>
       </HomePageWapper>
     </>
