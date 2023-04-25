@@ -23,6 +23,7 @@ export const useTaker = () => {
   };
 
   return {
+    name: "Taker",
     data: Taker,
     Add: (callback: any) => {
       const n = {
@@ -33,9 +34,11 @@ export const useTaker = () => {
       alter([...Taker]);
       callback(n);
     },
-    rename: (id: string, name: string) => {
+    rename: (id: string, name: string, color?: string) => {
       if (name == "") return;
-      Taker.filter((i) => i.id == id)[0].name = name;
+      const obj = Taker.filter((i) => i.id == id)[0];
+      obj.name = name;
+      obj.color = color;
       alter([...Taker]);
     },
     del: (id: string) => {

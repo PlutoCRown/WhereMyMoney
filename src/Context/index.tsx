@@ -1,10 +1,13 @@
 import React from "react";
 import { GlobalComponentsProvider } from "./DOM";
+import Config from "./Config";
 
 const GlobalContext = (props: { children: any }) => {
   return (
     <div>
-      <GlobalComponentsProvider>{props.children}</GlobalComponentsProvider>
+      <Config>
+        <GlobalComponentsProvider>{props.children}</GlobalComponentsProvider>
+      </Config>
     </div>
   );
 };

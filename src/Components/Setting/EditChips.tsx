@@ -1,29 +1,37 @@
 import { useBills } from "@/hooks";
 import { BillTData, ChipType } from "@/types";
-import { Button, Dialog, DialogTitle } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Input,
+  Paper,
+  linearProgressClasses,
+} from "@mui/material";
 import { useMemo, useState } from "react";
-import BillTable from "../Bill/BillTable";
 import Chips from "./Chips";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { BaseLine } from "./style";
+import { BaseLine, ChipsWapper, Flex, Grid9, Padding, Wapper } from "./style";
 import SimpleTable from "./SimpleTable";
 import { useMergeState } from "@/util/useMergeState";
+import DefaultEmoji from "../../Json/Emoji.json";
+import { startWithEmoji } from "@/util/EmojiTools";
+
 const EditChips: React.FC<{
-  data: ChipType[];
-  Add: (callback: any) => void;
-  rename: (id: string, name: string) => void;
-  del: (id: string) => void;
+  Data: {
+    name: string;
+    data: ChipType[];
+    Add: (callback: any) => void;
+    rename: (id: string, name: string, color?: string) => void;
+    del: (id: string) => void;
+  };
   title: string;
   BillLoc: (i: BillTData) => string | number;
-  color?:
-    | "default"
-    | "error"
-    | "info"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning";
-}> = ({ data, Add, rename, del, title, color, BillLoc }) => {
+  color?: any;
+}> = ({ Data, title, color, BillLoc }) => {
+  const { data, Add, rename, del, name } = Data;
   const [modal, setModal] = useMergeState({
     detail: false,
     delete: false,
@@ -32,9 +40,9 @@ const EditChips: React.FC<{
   const [confirm, setConfirm] = useState<
     "unComfirm" | "del&Disassociate" | "del&deleteBill"
   >("unComfirm");
-
   const [opening, setOpening] = useState<ChipType | null>(null);
-  const [cur, setCur] = useState<ChipType | null>(null);
+  const [input, setInput] = useState("");
+  const [Icolor, setColor] = useState("#FFF");
   const { data: Bill } = useBills();
 
   const filteredBill = useMemo(
@@ -43,30 +51,50 @@ const EditChips: React.FC<{
   );
 
   const OpenDialog = (item: any) => {
-    if (cur != item) {
+    setModal({ detail: true });
+    if (opening != item) {
       setOpening(item);
-      setModal({ detail: true });
     }
   };
   const handleDelete = () => {
     if (opening) {
       del(opening.id);
-      setModal({ detail: false });
+      setModal({ detail: false, delete: false });
       setOpening(null);
-      setModal({ delete: false });
     }
   };
 
+  const setEmoji = (emoji: string) => {
+    return () => {
+      const arr = input.split("");
+      console.log("1", arr);
+
+      if (arr.length > 0 && startWithEmoji(input)) {
+        arr.shift();
+        arr.shift();
+        console.log(arr);
+      }
+      setInput([emoji, ...arr].join(""));
+    };
+  };
+  const handleAdd = () => {
+    Add((item: ChipType) => {
+      rename(item.id, input, Icolor);
+    });
+    setModal({
+      adding: false,
+    });
+    setInput("");
+  };
+
   return (
-    <div>
+    <ChipsWapper>
       <h2>{title}</h2>
       <Chips
         List={data}
-        Add={() => cur == null && Add(setCur)}
-        rename={(id, val) => (rename(id, val), setCur(null))}
+        Add={() => setModal({ adding: true })}
         color={color}
         open={OpenDialog}
-        renameing={cur}
       />
       {/* 修改 */}
       <Dialog open={modal.detail} onClose={() => setModal({ detail: false })}>
@@ -106,7 +134,6 @@ const EditChips: React.FC<{
           {confirm == "del&deleteBill" && "这将删除与之相关的账单"}
           {confirm == "del&Disassociate" && "这将与之相关的账单值清除"}
         </DialogTitle>
-
         {confirm == "unComfirm" ? (
           <>
             <Button onClick={() => setConfirm("del&deleteBill")}>
@@ -124,28 +151,62 @@ const EditChips: React.FC<{
       </Dialog>
       {/* 新增 */}
       <Dialog open={modal.adding} onClose={() => setModal({ adding: false })}>
-        {opening && (
-          <>
-            <DialogTitle>
-              <BaseLine>
-                <span>
-                  {`${opening.name} 相关的 ${filteredBill.length} 条数据`}
-                  <BorderColorIcon className="icon" />
-                </span>
-                <Button>选择一个Emoji</Button>
-              </BaseLine>
-            </DialogTitle>
-            <Button>挑选个颜色？</Button>
-            <Button
-              onClick={() => (setModal({ adding: false }), setOpening(null))}
-              variant="contained"
-            >
-              确认
-            </Button>
-          </>
-        )}
+        <Wapper
+          className="t"
+          data-color={Icolor}
+          style={{ backgroundColor: Icolor }}
+        >
+          <DialogTitle>
+            <span style={{ mixBlendMode: "multiply" }}>添加标签</span>
+          </DialogTitle>
+        </Wapper>
+        <DialogContent>
+          <Input
+            fullWidth
+            placeholder="名字"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          ></Input>
+          <Flex>
+            <Padding>
+              <Paper>
+                <span className="title">挑选个颜色？</span>
+                <Grid9>
+                  {DefaultEmoji["color"].map((color) => (
+                    <Paper
+                      onClick={() => setColor(color)}
+                      className="color"
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
+                </Grid9>
+              </Paper>
+            </Padding>
+            <Padding>
+              <Paper>
+                <span className="title">选择一个图标？</span>
+                <Grid9>
+                  {DefaultEmoji[
+                    name as "Taker" | "Fountainhead" | "Purpose"
+                  ].map((emoji: any) => (
+                    <span
+                      style={{ fontSize: "2rem" }}
+                      onClick={setEmoji(emoji)}
+                    >
+                      {emoji}
+                    </span>
+                  ))}
+                </Grid9>
+                <div className="ripper"></div>
+              </Paper>
+            </Padding>
+          </Flex>
+        </DialogContent>
+        <Button onClick={handleAdd} variant="contained">
+          确认
+        </Button>
       </Dialog>
-    </div>
+    </ChipsWapper>
   );
 };
 

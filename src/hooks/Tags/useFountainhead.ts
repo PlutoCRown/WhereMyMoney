@@ -23,6 +23,7 @@ export const useFountainhead = () => {
   };
 
   return {
+    name: "Fountainhead",
     data: Fountainhead,
     Add: (callback: any) => {
       const n = {
@@ -33,9 +34,11 @@ export const useFountainhead = () => {
       alter([...Fountainhead]);
       callback(n);
     },
-    rename: (id: string, name: string) => {
+    rename: (id: string, name: string, color?: string) => {
       if (name == "") return;
-      Fountainhead.filter((i) => i.id == id)[0].name = name;
+      const obj = Fountainhead.filter((i) => i.id == id)[0];
+      obj.name = name;
+      obj.color = color;
       alter([...Fountainhead]);
     },
     del: (id: string) => {

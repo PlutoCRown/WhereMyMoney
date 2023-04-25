@@ -45,6 +45,6 @@ export const HomeContentWapper = styled(Box)`
   box-sizing: border-box;
   width: 98%;
   height: 100vh;
-  overflow: hidden;
+  overflow: scroll;
   padding: 20px;
 `;

@@ -24,6 +24,7 @@ export const usePurpose = () => {
   };
 
   return {
+    name: "Purpose",
     data: Purpose,
     Add: (callback: any) => {
       const n = {
@@ -34,9 +35,11 @@ export const usePurpose = () => {
       alter([...Purpose]);
       callback(n);
     },
-    rename: (id: string, name: string) => {
+    rename: (id: string, name: string, color?: string) => {
       if (name == "") return;
-      Purpose.filter((i) => i.id == id)[0].name = name;
+      const obj = Purpose.filter((i) => i.id == id)[0];
+      obj.name = name;
+      obj.color = color;
       alter([...Purpose]);
     },
     del: (id: string) => {
