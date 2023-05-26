@@ -1,8 +1,12 @@
+import { useMergeState } from "@/util/useMergeState";
 import React, { createContext, useState } from "react";
 
 // 此组件暴露的接口
 const Interface = {
-  config: {} as any,
+  config: {
+    useCurrencySuffixSymbol: "元",
+    useCurrencyPrefixSymbol: "￥",
+  } as any,
   setConfig: (state: any) => {},
 };
 
@@ -13,7 +17,7 @@ export const useGlobalConfig = () => {
 };
 
 const Config = (props: any) => {
-  const [config, setConfig] = useState({});
+  const [config, setConfig] = useMergeState(Interface.config);
   return (
     <Context.Provider value={{ config, setConfig }}>
       {props.children}

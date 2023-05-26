@@ -30,7 +30,8 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.10.16",
     "moment": "^2.29.4",
-    "umi": "^4.0.34"
+    "umi": "^4.0.34",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

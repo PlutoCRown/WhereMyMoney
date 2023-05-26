@@ -1,39 +1,67 @@
 import { useEffect, useState } from "react";
+import { useLocalStorage } from "./Memories/useLocalStorage";
+import { RandomId } from "@/util/RandomId";
+const storage = useLocalStorage<ShoppingData[]>("ShoppingList");
+const init = storage.get([]).map((i) => ({
+  ...i,
+  date: new Date(Date.parse(i.date as any)),
+  stopDate: i.stopDate ? new Date(Date.parse(i.stopDate as any)) : undefined,
+}));
 
 export const useShoppingList = () => {
   const [data, setData] = useState<ShoppingData[]>([
     {
-      id: "string",
-      date: new Date(),
-      name: "item",
-      price: 12345,
+      id: "1234",
+      date: new Date("2020,7,10"),
+      name: "手机",
+      price: 2799,
+      coefficient: 1,
+      isStopped: false,
+      Remark: "",
+    },
+    {
+      id: "123124",
+      date: new Date("2020,10,10"),
+      name: "电脑",
+      price: 4299,
+      isStopped: false,
       coefficient: 5 / 7,
-      Remark: "string",
+      Remark: "电脑只有工作日才用，日均要乘5/7",
     },
   ]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  const Add = (n: ShoppingData) => {
-    data.unshift(n);
+  const Add = (n: {
+    name: string;
+    coefficient: number;
+    price: number;
+    Remark: string;
+    date: Date;
+  }) => {
+    data.unshift({
+      id: RandomId(),
+      isStopped: false,
+      ...n,
+    });
     setData([...data]);
-    console.log(n);
   };
 
-  const rename = () => {
-    console.log(data);
-  };
+  function mutation<T extends keyof ShoppingData>(
+    obj: ShoppingData,
+    key: T,
+    value: ShoppingData[T]
+  ) {
+    obj[key] = value;
+    setData([...data]);
+  }
 
-  const del = () => {
-    console.log(data);
+  const del = (id: string) => {
+    setData(data.filter((i) => i.id !== id));
   };
 
   return {
     data,
     Add,
-    rename,
+    mutation,
     del,
   };
 };
@@ -45,4 +73,6 @@ export type ShoppingData = {
   coefficient: number;
   price: number;
   Remark: string;
+  isStopped: boolean;
+  stopDate?: Date;
 };

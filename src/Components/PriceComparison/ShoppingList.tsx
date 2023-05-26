@@ -1,70 +1,55 @@
-import React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import Paper from "@mui/material/Paper";
-import { Button, TableRow } from "@mui/material";
-import {
-  AddButton,
-  HoverDisplay,
-  StyledTableCell,
-  StyledTableRow,
-} from "../Bill/style";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import AddchartIcon from "@mui/icons-material/Addchart";
 import { useShoppingList } from "@/hooks/useShoppingList";
+import { Flex, ShoppingCard } from "./style";
+import { useMergeState } from "@/util/useMergeState";
+import { useState } from "react";
+import { QandA } from "./QandA";
+import { ShoppingItem } from "./ShoppingItem";
+import { EditDialog } from "./EditDialog";
+import { AddDialog } from "./AddDialog";
 
 const ShoppingList = () => {
-  const { data, Add } = useShoppingList();
+  const { data, Add, mutation, del } = useShoppingList();
+  const [modal, setModal] = useMergeState({
+    detail: false,
+    adding: false,
+    QandA: false,
+  });
+  const trigger = (key: keyof typeof modal, value: boolean) => () =>
+    setModal({ [key]: value });
+  const [opening, setOpen] = useState(data[0]);
+
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }}>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>物品</StyledTableCell>
-              <StyledTableCell>购物日期</StyledTableCell>
-              <StyledTableCell>金额</StyledTableCell>
-              <StyledTableCell>当前平均</StyledTableCell>
-              <StyledTableCell align="right">备注</StyledTableCell>
-              <StyledTableCell align="right"> </StyledTableCell>
-            </TableRow>
-          </TableHead>
+      <Flex>
+        {data.map((item) => (
+          <ShoppingItem
+            key={item.id}
+            item={item}
+            openDetail={() => (setOpen(item), setModal({ detail: true }))}
+          />
+        ))}
+        <ShoppingCard className="addBtn" onClick={trigger("adding", true)}>
+          <span style={{ fontSize: 80 }}>+</span>
+        </ShoppingCard>
+      </Flex>
+      {/* 添加对话框 */}
+      <AddDialog
+        open={modal.adding}
+        openHelper={() => setModal({ QandA: true })}
+        close={trigger("adding", false)}
+        AddFn={Add}
+      />
+      {/* 修改对话框 */}
+      <EditDialog
+        open={modal.detail}
+        close={trigger("detail", false)}
+        opening={opening}
+        mutation={mutation}
+        delFn={del}
+      />
 
-          <TableBody>
-            {data.map((row) => (
-              <StyledTableRow key={row.id}>
-                <StyledTableCell component="th" scope="row">
-                  {row.date.toDateString()}
-                </StyledTableCell>
-                <StyledTableCell>{row.name}</StyledTableCell>
-                <StyledTableCell>{row.price}</StyledTableCell>
-                <StyledTableCell>
-                  {(row.price * row.coefficient) /
-                    (new Date().getDay() - row.date.getDay() + 1)}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.Remark}</StyledTableCell>
-                <StyledTableCell align="right">
-                  <HoverDisplay>
-                    <BorderColorIcon />
-                  </HoverDisplay>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <AddButton
-          variant="contained"
-          fullWidth
-          startIcon={<AddchartIcon />}
-          //   onClick={()=>Add()}
-        >
-          新购置物品
-        </AddButton>
-      </TableContainer>
+      <QandA open={modal.QandA} close={trigger("QandA", false)} />
     </>
   );
 };
-
 export default ShoppingList;

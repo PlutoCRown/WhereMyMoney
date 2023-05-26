@@ -12,6 +12,8 @@ const LineView = () => {
     today.isoWeekday() - 1 + GraphCellNumber,
     "days"
   );
+  const calc = new Worker("@/services/BillAggregation.ts", {});
+
   const data = useMemo(() => {
     const res = new Array(today.isoWeekday() + GraphCellNumber).fill(0);
     Bills.forEach(

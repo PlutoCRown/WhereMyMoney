@@ -11,6 +11,11 @@ export type BillTData = {
   Reason: string;
   Amount: number;
   Remark: string;
+  buffer?: {
+    TakerName: string;
+    ReasonName: string;
+  };
+  existRefer?: boolean;
 };
 
 export type Getter<T> = (defaultValue?: T) => T;
