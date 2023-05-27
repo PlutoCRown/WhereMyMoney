@@ -96,16 +96,16 @@ const useBeeStore = create(
 );
 
 // Immer
-import { immer } from "zustand/middleware/immer";
-const useBeeStoreImmer = create(
-  immer((set) => ({
-    bees: 0,
-    addBees: (by: number) =>
-      set((state: any) => {
-        state.bees += by;
-      }),
-  }))
-);
+// import { immer } from "zustand/middleware/immer";
+// const useBeeStoreImmer = create(
+//   immer((set) => ({
+//     bees: 0,
+//     addBees: (by: number) =>
+//       set((state: any) => {
+//         state.bees += by;
+//       }),
+//   }))
+// );
 
 // 持久化
 import { persist, createJSONStorage } from "zustand/middleware";

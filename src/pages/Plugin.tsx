@@ -8,8 +8,8 @@ import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import PluginList from "@/Components/Plugin/PluginList";
 const Plugin = () => {
   const actions = [
-    { icon: <AddCircleIcon />, name: "Import" },
-    { icon: <AddBusinessIcon />, name: "Market" },
+    { icon: <AddCircleIcon />, name: "导入" },
+    { icon: <AddBusinessIcon />, name: "市场" },
   ];
 
   return (

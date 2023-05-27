@@ -15,7 +15,6 @@ import FaceIcon from "@mui/icons-material/Face";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import SelectInput from "./SelectInput";
 import { HeaderWapper } from "./style";
-import { RandomId } from "@/util/RandomId";
 import { useTaker, usePurpose, useFountainhead, useBills } from "@/hooks";
 
 const EditDiglog: React.FC<{

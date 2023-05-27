@@ -34,6 +34,7 @@ export const AddButton = styled(Button)`
 
 export const HoverDisplay = styled(Box)`
   opacity: 0;
+  cursor: pointer;
   &:hover {
     opacity: 1;
   }

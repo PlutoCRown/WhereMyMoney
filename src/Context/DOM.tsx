@@ -17,7 +17,7 @@ export const useGlobalComponents = () => {
 export const GlobalComponentsProvider = (props: { children: any }) => {
   const [toast, setToast] = useMergeState({
     open: false,
-    color: "error" as AlertColor,
+    color: "info" as AlertColor,
     message: "",
   });
   const handleClick = (color: AlertColor, message: string) => {

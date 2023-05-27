@@ -4,11 +4,9 @@ import Config from "./Config";
 
 const GlobalContext = (props: { children: any }) => {
   return (
-    <div>
-      <Config>
-        <GlobalComponentsProvider>{props.children}</GlobalComponentsProvider>
-      </Config>
-    </div>
+    <Config>
+      <GlobalComponentsProvider>{props.children}</GlobalComponentsProvider>
+    </Config>
   );
 };
 

@@ -7,7 +7,7 @@ const { Toast } = useGlobalComponents();
 export function useIndexDB<T>(key: string) {
   if (db == null) {
     if (!("indexDB" in window)) {
-      Toast("error", "你的浏览器不支持IndexDB | 请使用App版本");
+      Toast("error", "你的浏览器不支持IndexDB | 建议使用云同步以保证数据安全");
       // 降级使用localStorage完成
       return useLocalStorage(key);
     }

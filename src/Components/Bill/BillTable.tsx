@@ -21,8 +21,8 @@ const BillTable: React.FC<{
 }> = ({ data, Add }) => {
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+        <Table stickyHeader sx={{ minWidth: 700 }}>
           <TableHead>
             <TableRow>
               <StyledTableCell>账单日期</StyledTableCell>
@@ -33,7 +33,6 @@ const BillTable: React.FC<{
               <StyledTableCell align="right"> </StyledTableCell>
             </TableRow>
           </TableHead>
-
           <TableBody>
             {data.map((row) => (
               <StyledTableRow key={row.id}>
@@ -53,15 +52,15 @@ const BillTable: React.FC<{
             ))}
           </TableBody>
         </Table>
-        <AddButton
-          variant="contained"
-          fullWidth
-          startIcon={<AddchartIcon />}
-          onClick={Add}
-        >
-          马上记一笔
-        </AddButton>
       </TableContainer>
+      <AddButton
+        variant="contained"
+        fullWidth
+        startIcon={<AddchartIcon />}
+        onClick={Add}
+      >
+        马上记一笔
+      </AddButton>
     </>
   );
 };
