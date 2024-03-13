@@ -21,7 +21,10 @@ const BillTable: React.FC<{
 }> = ({ data, Add }) => {
   return (
     <>
-      <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+      <TableContainer
+        component={Paper}
+        style={{ maxHeight: `calc(100% - 64px)` }}
+      >
         <Table stickyHeader sx={{ minWidth: 700 }}>
           <TableHead>
             <TableRow>

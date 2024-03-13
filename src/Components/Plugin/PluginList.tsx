@@ -38,7 +38,7 @@ const PluginList = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1, overflow: "scroll", paddingTop: "20px" }}>
+      <Box sx={{ flexGrow: 1, paddingTop: "20px" }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}

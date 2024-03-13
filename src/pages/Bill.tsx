@@ -23,7 +23,7 @@ export default () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <BillTable data={data} Add={handleOpen} />
       <EditDiglog open={open} handleClose={handleClose}></EditDiglog>
     </div>

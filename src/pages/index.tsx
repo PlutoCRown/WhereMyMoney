@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Outlet, history } from "umi";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import CameraIcon from "@mui/icons-material/Camera";
-import BlindsClosedIcon from "@mui/icons-material/BlindsClosed";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";

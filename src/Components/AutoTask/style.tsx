@@ -76,6 +76,7 @@ export const LineValue = styled(Box)`
 export const FlexRow = styled(Box)`
   display: flex;
   flex-direction: row;
+  height: 100%;
 `;
 export const Content = styled(Box)`
   padding: 10px;

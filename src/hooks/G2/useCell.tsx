@@ -1,15 +1,20 @@
 import { Chart } from "@antv/g2";
 import { Moment } from "moment";
+type COORD = {
+  x: number;
+  y: number;
+};
 
 export const useCell = (props: {
   container: HTMLElement;
   data: number[];
   startday: Moment;
+  scale?: COORD;
 }) => {
   const chart = new Chart({
     container: props.container,
-    width: 600,
-    height: 240,
+    width: props.scale?.x || 600,
+    height: props.scale?.y || 240,
   });
 
   chart
@@ -22,7 +27,7 @@ export const useCell = (props: {
     .scale("color", {
       type: "threshold",
       domain: [-100, -10, 10, 100],
-      range: ["green", "#3399cc", "#eee", "pink", "red"],
+      range: ["#33FF33", "#85FF85", "transparent", "#FF8585", "#FF3333"],
     })
     .encode(
       "y",

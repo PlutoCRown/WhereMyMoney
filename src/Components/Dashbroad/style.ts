@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 
 export const GridContainer = styled(Box)`
   display: grid;
+  height: 100%;
   width: 100%;
   grid-template-areas:
     "TODO TODO Income"
@@ -38,14 +39,11 @@ const Card = styled(Paper)`
 export const Shorthand = styled(Card)`
   overflow: visible;
   grid-area: RadialView;
-  min-width: 200px;
-  max-height: 240px;
   display: inherit;
 `;
 
 export const TODO = styled(Card)`
   overflow: visible;
-  max-height: 220px;
   grid-area: TODO;
 `;
 
@@ -72,7 +70,6 @@ export const Tips = styled(Card)`
 
 export const BillWapper = styled(Box)`
   margin-top: 20px;
-  /* min-height: 73vh; */
 `;
 
 export const TodoListWapper = styled(Box)`
@@ -84,8 +81,4 @@ export const TodoListWapper = styled(Box)`
   }
 `;
 
-export const TipWapper = styled(Box)`
-  width: 300px;
-  /* height: 150px;
-  text-overflow: ellipsis; */
-`;
+export const TipWapper = styled(Box)``;

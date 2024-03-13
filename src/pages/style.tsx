@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Box } from "@mui/material";
 
+// 整块
 export const HomePageWapper = styled(Box)`
   display: flex;
   position: relative;
@@ -14,8 +15,10 @@ export const HomePageWapper = styled(Box)`
   );
 `;
 
+// 左半边
 export const HomeNavWapper = styled(Box)`
   height: 100%;
+  min-width: 176px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -36,15 +39,19 @@ export const HomeNavWapper = styled(Box)`
     font-size: 32px;
   }
   position: relative;
-  width: 300px;
-  max-height: 97vh;
+  width: 20vw;
   overflow: scroll;
 `;
 
+// 右半边
 export const HomeContentWapper = styled(Box)`
   box-sizing: border-box;
-  width: 98%;
-  height: 100vh;
-  overflow: scroll;
+  width: 80vw;
+  height: 100%;
+  overflow-y: scroll;
   padding: 20px;
+  /* border: 10px solid red; */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

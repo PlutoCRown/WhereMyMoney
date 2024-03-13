@@ -1,5 +1,6 @@
 import { defineConfig } from "umi";
-
+const env = process.env.NODE_ENV;
+console.log("当前环境： ", env);
 export default defineConfig({
   npmClient: "pnpm",
   routes: [
@@ -17,4 +18,6 @@ export default defineConfig({
       ],
     },
   ],
+  publicPath: env == "development" ? "/" : "/WhereMyMoney/",
+  // history: { type: "hash" },
 });
