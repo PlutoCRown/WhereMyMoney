@@ -13,7 +13,7 @@ export const useCell = (props: {
 }) => {
   const chart = new Chart({
     container: props.container,
-    width: props.scale?.x || 600,
+    width: props.scale?.x || 800,
     height: props.scale?.y || 240,
   });
 

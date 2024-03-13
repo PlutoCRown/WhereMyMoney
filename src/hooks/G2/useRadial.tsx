@@ -7,7 +7,7 @@ export const useRadial = (props: {
 }) => {
   const chart = new Chart({
     container: props.container,
-    width: 300,
+    width: 400,
     height: 300,
     paddingLeft: 50,
   });

@@ -17,7 +17,7 @@ export const AutoTaskList = () => {
       <AutoTaskCard>
         <div className="title">任务名字</div>
         <Stack spacing={1}>
-          <div style={{}}>
+          <div>
             <ChatIcon className="icon" /> 通知任务
           </div>
           <div>

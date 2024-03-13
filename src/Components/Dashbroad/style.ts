@@ -22,6 +22,7 @@ const Card = styled(Paper)`
   .title {
     font-size: 36px;
     user-select: none;
+    color: #333;
   }
   .num {
     font-weight: 2;
@@ -81,4 +82,6 @@ export const TodoListWapper = styled(Box)`
   }
 `;
 
-export const TipWapper = styled(Box)``;
+export const TipWapper = styled(Box)`
+  width: 300px;
+`;

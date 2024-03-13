@@ -56,8 +56,8 @@ const RadialView = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <div ref={chart1} style={{ marginTop: "-30px" }}></div>
-      <div ref={chart2} style={{ marginTop: "-30px" }}></div>
+      <div ref={chart1}></div>
+      <div ref={chart2}></div>
     </div>
   );
 };

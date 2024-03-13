@@ -8,6 +8,7 @@ export const Wapper = styled(Paper)`
   height: 82vh;
   position: relative;
   overflow: hidden;
+  color: #333;
   /* align-items: stretch; */
   .decoratorWapper {
     width: 100%;
@@ -59,18 +60,19 @@ export const Wapper = styled(Paper)`
     margin-bottom: 0.3em;
   }
   .icon {
+    opacity: 0.8;
     vertical-align: middle;
   }
 `;
 export const LineKey = styled(Box)`
   font-size: 12px;
   user-select: none;
-  color: #595959;
+  color: #666;
 `;
 export const LineValue = styled(Box)`
   font-size: 12px;
+  color: #000;
   font-weight: bold;
-  color: #000000;
   user-select: text;
 `;
 export const FlexRow = styled(Box)`

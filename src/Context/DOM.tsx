@@ -44,22 +44,6 @@ export const GlobalComponentsProvider = (props: { children: any }) => {
           {toast.message}
         </Alert>
       </Snackbar>
-      {/* 弹出提示 */}
-      {/* <Popover
-              open={confirm}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              anchorEl={anchorEl}
-              transformOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
-              }}
-              onClose={() => setConfirm(false)}
-            >
-              <Typography sx={{ p: 2 }}>确认要删除吗？ 再次点击删除</Typography>
-            </Popover> */}
       {/* 其他全局组件 */}
     </Context.Provider>
   );
